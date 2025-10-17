@@ -1,0 +1,129 @@
+---
+import LogoSVG from "../../assets/logo.svg";
+import data from "../../data.json";
+
+const { class: className } = Astro.props;
+---
+
+<header class:list={["relative py-9 xl:py-16", className]}>
+  <nav class="flex items-center justify-between">
+    <a href="#" class="shrink-0 w-6 lg:w-8">
+      <span class="sr-only">Company Name</span>
+      <LogoSVG class="text-gray-900" />
+    </a>
+    <div class="hidden lg:flex lg:items-center lg:gap-10">
+      {
+        data.links.map((link, i, links) => {
+          const anchor = (
+            <a
+              href="#"
+              class:list={[
+                "text-[0.9375rem]/5 font-condensed font-bold uppercase tracking-wider",
+                { "opacity-50": link.tinted },
+                "hover:underline hover:decoration-2 hover:underline-offset-2",
+              ]}
+            >
+              {link.text}
+            </a>
+          );
+          if (i == links.length - 1) {
+            return [
+              <div class="w-1.5 h-1.5 rounded-full bg-blue-950 opacity-15" />,
+              anchor,
+            ];
+          }
+          return anchor;
+        })
+      }
+    </div>
+    <button
+      id="menu-open"
+      class="grid place-items-center w-8 h-8 -mr-4 lg:hidden cursor-pointer"
+      aria-label="Open menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+        <g fill="#242942" fill-rule="evenodd">
+          <path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z"></path>
+        </g>
+      </svg>
+    </button>
+    <button
+      id="menu-close"
+      class="place-items-center w-8 h-8 -mr-4 lg:hidden cursor-pointer hidden"
+      aria-label="Close menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+        <path
+          fill="#242942"
+          fill-rule="evenodd"
+          d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z"
+        ></path>
+      </svg>
+    </button>
+  </nav>
+  <div
+    id="menu"
+    class="absolute top-[100%] left-0 right-0 grid gap-6 px-12 py-6 text-center rounded-[3px] bg-white shadow-(--menu-shadow) transition-all scale-[0.5] opacity-0 pointer-events-none"
+  >
+    {
+      data.links.map((link, i, links) => {
+        const anchor = (
+          <a
+            href="#"
+            class:list={[
+              "text-[1.125rem]/[1.25] font-condensed font-bold uppercase tracking-wider justify-self-center  ",
+              { "opacity-50": link.tinted },
+              "hover:underline hover:decoration-2 hover:underline-offset-2",
+            ]}
+          >
+            {link.text}
+          </a>
+        );
+        if (i == links.length - 1) {
+          return [<div class="w-full h-px bg-blue-950 opacity-15 " />, anchor];
+        }
+        return anchor;
+      })
+    }
+  </div>
+</header>
+
+<script>
+  const menuOpen = document.querySelector("#menu-open")!;
+  const menuClose = document.querySelector("#menu-close")!;
+  const menu = document.querySelector("#menu")!;
+
+  menu.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) {
+      closeMenu();
+    }
+  });
+
+  menuOpen.addEventListener("click", () => {
+    openMenu();
+  });
+
+  menuClose.addEventListener("click", () => {
+    closeMenu();
+  });
+
+  function openMenu() {
+    menu.classList.remove("opacity-0");
+    menu.classList.remove("scale-[0.5]");
+    menu.classList.remove("pointer-events-none");
+    menuOpen.classList.remove("grid");
+    menuOpen.classList.add("hidden");
+    menuClose.classList.remove("hidden");
+    menuClose.classList.add("grid");
+  }
+
+  function closeMenu() {
+    menu.classList.add("opacity-0");
+    menu.classList.add("scale-[0.5]");
+    menu.classList.add("pointer-events-none");
+    menuOpen.classList.remove("hidden");
+    menuOpen.classList.add("grid");
+    menuClose.classList.remove("grid");
+    menuClose.classList.add("hidden");
+  }
+</script>

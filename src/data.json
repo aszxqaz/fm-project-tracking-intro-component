@@ -1,0 +1,17 @@
+{
+  "links": [
+    {
+      "text": "Product"
+    },
+    {
+      "text": "Features"
+    },
+    {
+      "text": "Pricing"
+    },
+    {
+      "text": "Login",
+      "tinted": true
+    }
+  ]
+}

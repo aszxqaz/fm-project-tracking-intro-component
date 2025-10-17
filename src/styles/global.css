@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gray-900: #323334;
+  --color-blue-950: #242942;
+  --color-blue-100: #edf2f6;
+  --color-red-400: #ff5e5e;
+  --color-red-350: #ff8686;
+
+  --color-primary: var(--color-blue-950);
+
+  --menu-shadow: 0 5px 10px 0 rgb(0 0 0 / 0.15);
+
+  --font-base: "Barlow", sans-serif;
+  --font-condensed: "Barlow Condensed", sans-serif;
+
+  --text-base: 1.125rem;
+  --text-sm: 0.9375rem;
+  --text-4xl: 2.5rem;
+  --text-6xl: 4rem;
+
+  --leading-base: 1.45em;
+
+  --breakpoint-xs: 35rem;
+}
+
+@layer components {
+  .page {
+    --max-container-width: 69.375rem;
+    --min-padding-inline: clamp(2rem, -0.86rem + 12.2vw, 5rem);
+    --container-width: min(
+      100% - 2 * var(--min-padding-inline),
+      var(--max-container-width)
+    );
+    --padding-inline: calc(((100% - var(--container-width)) / 2));
+
+    display: grid;
+    grid-template-columns: var(--padding-inline) 1fr 1fr var(--padding-inline);
+    grid-template-rows: auto 4fr 1fr;
+  }
+
+  .page__header {
+    grid-column: 2 / -2;
+    grid-row: 1 / 2;
+  }
+
+  .page__content {
+    grid-column: 2 / -2;
+    /* grid-row: 4 / 5; */
+  }
+
+  .page__illustration {
+    grid-column: 2 / -1;
+    grid-row: 2 / 3;
+  }
+
+  .page__decoration {
+    grid-column: 3 / -1;
+    grid-row: 1 / 4;
+  }
+
+  @media (min-width: 35rem) {
+    .page {
+      grid-template-columns: var(--padding-inline) 15fr 46fr var(
+          --padding-inline
+        );
+      grid-template-rows: auto 265fr 188fr;
+    }
+
+    .page__illustration {
+      grid-row: 2 / 4;
+    }
+
+    .page__decoration {
+      grid-row: 1 / 3;
+    }
+  }
+
+  @media (max-width: calc(80rem - 1px)) {
+    .page__illustration {
+      max-height: 500px;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .page {
+      --min-padding-inline: clamp(5rem, -1rem + 12.65vw, 10.3125rem);
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .page {
+      grid-template-columns: var(--padding-inline) 29.375rem 100fr 16fr 480fr var(
+          --padding-inline
+        );
+      grid-template-rows: auto 207fr 248fr;
+    }
+
+    .page__content {
+      grid-column: 2 / 3;
+      grid-row: 2 / 4;
+
+      display: grid;
+      grid-template-rows: subgrid;
+    }
+
+    .page__illustration {
+      aspect-ratio: 1.5;
+      grid-column: 5 / -1;
+      grid-row: 2 / 4;
+    }
+
+    .page__decoration {
+      grid-column: 4 / -1;
+      grid-row: 1 / 3;
+    }
+  }
+}

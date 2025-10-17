@@ -1,0 +1,13 @@
+---
+const { as: El = "div" } = Astro.props;
+---
+
+<El
+  class:list={[
+    "inline-grid place-items-center px-[0.7em] h-[1.666em]",
+    "font-condensed font-bold text-sm leading-none tracking-wider uppercase",
+    "rounded-xl text-white bg-primary",
+  ]}
+>
+  <slot />
+</El>

@@ -1,0 +1,11 @@
+---
+const { as: El = "button" } = Astro.props;
+---
+
+<El
+  class:list={[
+    "px-[1.35em] md:px-[2.42em] py-[0.6875rem] md:py-[0.9375rem]",
+    "font-condensed text-sm/[1.2] font-bold tracking-[0.07em] uppercase",
+    "rounded-[5px] text-white bg-red-400 cursor-pointer hover:bg-red-350 transition-colors duration-300",
+  ]}><slot /></El
+>
