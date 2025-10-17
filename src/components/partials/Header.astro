@@ -9,7 +9,17 @@ const { class: className } = Astro.props;
   <nav class="flex items-center justify-between">
     <a href="#" class="shrink-0 w-6 lg:w-8">
       <span class="sr-only">Company Name</span>
-      <LogoSVG class="text-gray-900" />
+      <svg
+        class="text-gray-900"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+      >
+        <g fill="currentColor" fill-rule="evenodd">
+          <path
+            d="M0 32V.241h23.041zM31.15 32V.241h-4.411L17.48 13.158zM3.645 32l11.854-15.879L27.353 32z"
+          ></path>
+        </g>
+      </svg>
     </a>
     <div class="hidden lg:flex lg:items-center lg:gap-10">
       {
